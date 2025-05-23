@@ -1,6 +1,11 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
-import { fetchFail, fetchStart, loginSuccess } from "../features/authSlice"
+import { 
+    fetchFail, 
+    fetchStart, 
+    loginSuccess,
+    registerSuccess 
+} from "../features/authSlice"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 
@@ -30,7 +35,28 @@ const useAuthCalls = () => {
         }
     }
 
-    return { login };
+    const register = async (userInfo) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosPublic.post("/api/auth/register", userInfo);
+            dispatch(registerSuccess(data))
+            toast.success(`Registration successful. Welcome, ${data.name}`)
+
+            if (data.role === "admin") {
+                navigate("/admin")
+            } else if (data.role === "member") {
+                navigate("/user")
+            } else {
+                navigate("/")
+            }
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`Registration failed: ${error.response.data.message}`)
+        }
+    }
+
+    return { login, register };
 }
 
 export default useAuthCalls
