@@ -4,14 +4,15 @@ import {
     fetchFail, 
     fetchStart, 
     loginSuccess,
-    registerSuccess 
+    registerSuccess,
+    logoutSuccess 
 } from "../features/authSlice"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 
 const useAuthCalls = () => {
     const dispatch = useDispatch()
-    const { axiosPublic } = useAxios()
+    const { axiosPublic, axiosWithToken } = useAxios()
     const navigate = useNavigate()
 
     const login = async (userInfo) => {
@@ -31,7 +32,7 @@ const useAuthCalls = () => {
         } catch (error) {
             dispatch(fetchFail())
             console.log(error);
-            toast.error(`Login failed: ${error.response.data.message}`)
+            toast.error(`Login failed: ${error.response.data.message || error.message}`)
         }
     }
 
@@ -52,11 +53,23 @@ const useAuthCalls = () => {
         } catch (error) {
             dispatch(fetchFail())
             console.log(error);
-            toast.error(`Registration failed: ${error.response.data.message}`)
+            toast.error(`Registration failed: ${error.response.data.message || error.message}`)
         }
     }
 
-    return { login, register };
+    const logout = async () => {
+        dispatch(fetchStart());
+        try {
+            await axiosWithToken.get("/api/auth/logout");
+            dispatch(logoutSuccess());
+        } catch (error) {
+            dispatch(fetchFail());
+            console.log(error);
+            toast.error(`Logout failed: ${error.response.data.message || error.message}`);
+        }
+    }
+
+    return { login, register, logout };
 }
 
 export default useAuthCalls

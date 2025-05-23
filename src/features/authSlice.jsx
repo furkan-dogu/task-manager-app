@@ -5,9 +5,6 @@ const initialState = {
     loading: false,
     error: false,
     token: "",
-    name: "",
-    email: "",
-    profileImageUrl: null,
 };
 
 const authSlice = createSlice({
@@ -25,17 +22,16 @@ const authSlice = createSlice({
             state.loading = false
             state.user = payload
             state.token = payload.token
-            state.name = payload.name
-            state.email = payload.email
-            state.profileImageUrl = payload.profileImageUrl
         },
         registerSuccess: (state, { payload }) => {
             state.loading = false
             state.user = payload
             state.token = payload.token
-            state.name = payload.name
-            state.email = payload.email
-            state.profileImageUrl = payload.profileImageUrl
+        },
+        logoutSuccess: (state) => {
+            state.loading = false
+            state.user = null
+            state.token = ""
         }
     }
 })
@@ -44,7 +40,8 @@ export const {
     fetchStart,
     fetchFail,
     loginSuccess,
-    registerSuccess
+    registerSuccess,
+    logoutSuccess
 } = authSlice.actions
 
 export default authSlice.reducer
