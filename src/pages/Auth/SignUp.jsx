@@ -5,6 +5,8 @@ import Input from "../../components/Inputs/Input";
 import { Link } from "react-router-dom";
 import { validateEmail } from "../../helpers/validateEmail";
 import AuthLayout from "../../layouts/AuthLayout";
+import { useSelector } from "react-redux";
+import Loading from "../../components/Loading";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -17,16 +19,17 @@ const SignUp = () => {
   const [error, setError] = useState(null);
 
   const { register } = useAuthCalls();
+  const { loading } = useSelector((state) => state.auth);
 
   const handleChange = (field) => (e) => {
-    const value = e.target?.files ? e.target.files[0] : e.target.value
-    setData({ ...data, [field]: value })
-  }
+    const value = e.target?.files ? e.target.files[0] : e.target.value;
+    setData({ ...data, [field]: value });
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    const { name, email, password, profileImageUrl, adminInviteToken } = data
+    const { name, email, password, profileImageUrl, adminInviteToken } = data;
 
     if (!name) {
       setError("Please enter a full name.");
@@ -55,64 +58,73 @@ const SignUp = () => {
     }
 
     register(formData);
-  }
+  };
 
-  return (
-    <AuthLayout>
-      <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Create an Account</h3>
-        <p className="text-xs text-slate-700 mt-[5px] mb-6">
-          Join us today by entering your details below.
-        </p>
-
-        <form onSubmit={handleSignUp}>
-          <ProfilePhotoSelector image={data.profileImageUrl} setImage={(file) => setData({ ...data, profileImageUrl: file })} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              value={data.name}
-              onChange={handleChange("name")}
-              label="Full Name"
-              placeholder="John"
-              type="text"
-            />
-            <Input
-              value={data.email}
-              onChange={handleChange("email")}
-              label="Email Address"
-              placeholder="john@example.com"
-              type="text"
-            />
-            <Input
-              value={data.password}
-              onChange={handleChange("password")}
-              label="Password"
-              placeholder="Min 8 Characters"
-              type="password"
-            />
-            <Input
-              value={data.adminInviteToken}
-              onChange={handleChange("adminInviteToken")}
-              label="Admin Invite Token"
-              placeholder="6 Digit Code"
-              type="text"
-            />
-          </div>
-          {error && <p className="text-xs text-red-500 pb-2.5">{error}</p>}
-
-          <button type="submit" className="btn-primary">
-            SIGN UP
-          </button>
-
-          <p className="text-[13px] text-slate-800 mt-3">
-            Already an account?{" "}
-            <Link className="font-medium text-primary underline" to={"/"}>
-              Login
-            </Link>
+  if (loading) {
+    return <Loading />;
+  } else {
+    return (
+      <AuthLayout>
+        <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
+          <h3 className="text-xl font-semibold text-black dark:text-white">
+            Hesap Oluşturun
+          </h3>
+          <p className="text-xs text-slate-700 dark:text-slate-400 mt-[5px] mb-6">
+            Aşağıya bilgilerinizi girerek bugün bize katılın.
           </p>
-        </form>
-      </div>
-    </AuthLayout>
-  );
+
+          <form onSubmit={handleSignUp}>
+            <ProfilePhotoSelector
+              image={data.profileImageUrl}
+              setImage={(file) => setData({ ...data, profileImageUrl: file })}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input
+                value={data.name}
+                onChange={handleChange("name")}
+                label="Ad Soyad"
+                placeholder="John"
+                type="text"
+              />
+              <Input
+                value={data.email}
+                onChange={handleChange("email")}
+                label="E-posta Adresi"
+                placeholder="john@example.com"
+                type="text"
+              />
+              <Input
+                value={data.password}
+                onChange={handleChange("password")}
+                label="Şifre"
+                placeholder="Min 8 Karakter"
+                type="password"
+              />
+              <Input
+                value={data.adminInviteToken}
+                onChange={handleChange("adminInviteToken")}
+                label="Admin Invite Token"
+                placeholder="6 Haneli Kod"
+                type="text"
+              />
+            </div>
+            {error && <p className="text-xs text-red-500 pb-2.5">{error}</p>}
+
+            <button type="submit" className="btn-primary">
+              KAYIT OL
+            </button>
+
+            <p className="text-[13px] text-slate-800 dark:text-slate-500 mt-3">
+              Zaten bir hesabınız var mı?{" "}
+              <Link className="font-medium text-primary underline" to={"/"}>
+                Giriş
+              </Link>
+            </p>
+          </form>
+        </div>
+      </AuthLayout>
+    );
+  }
 };
 
 export default SignUp;

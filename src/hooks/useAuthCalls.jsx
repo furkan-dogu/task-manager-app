@@ -20,7 +20,7 @@ const useAuthCalls = () => {
         try {
             const { data } = await axiosPublic.post("/api/auth/login", userInfo);
             dispatch(loginSuccess(data))
-            toast.success(`Login successful. Welcome, ${data.name}`)
+            toast.success(`Hoşgeldin ${data.name}`)
 
             if (data.role === "admin") {
                 navigate("/admin")
@@ -32,7 +32,7 @@ const useAuthCalls = () => {
         } catch (error) {
             dispatch(fetchFail())
             console.log(error);
-            toast.error(`Login failed: ${error.response.data.message || error.message}`)
+            toast.error(`${error.response.data.message || error.message}`)
         }
     }
 
@@ -41,7 +41,7 @@ const useAuthCalls = () => {
         try {
             const { data } = await axiosPublic.post("/api/auth/register", userInfo);
             dispatch(registerSuccess(data))
-            toast.success(`Registration successful. Welcome, ${data.name}`)
+            toast.success(`Kayıt başarılı. Hoşgeldin ${data.name}`)
 
             if (data.role === "admin") {
                 navigate("/admin")
@@ -53,7 +53,7 @@ const useAuthCalls = () => {
         } catch (error) {
             dispatch(fetchFail())
             console.log(error);
-            toast.error(`Registration failed: ${error.response.data.message || error.message}`)
+            toast.error(`${error.response.data.message || error.message}`)
         }
     }
 
@@ -65,7 +65,7 @@ const useAuthCalls = () => {
         } catch (error) {
             dispatch(fetchFail());
             console.log(error);
-            toast.error(`Logout failed: ${error.response.data.message || error.message}`);
+            toast.error(`${error.response.data.message || error.message}`);
         }
     }
 
