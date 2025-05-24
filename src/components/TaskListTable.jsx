@@ -50,6 +50,7 @@ const TaskListTable = ({ tableData }) => {
         return priority;
     }
   };
+  
   return (
     <div className="overflow-x-auto p-0 rounded-lg mt-3">
       <table className="min-w-full">
@@ -95,7 +96,7 @@ const TaskListTable = ({ tableData }) => {
                 </span>
               </td>
               <td className="p-4 text-gray-700 dark:text-gray-200 text-[13px] text-nowrap">
-                {new Date().toLocaleDateString("tr-TR", {
+                {new Date(task.createdAt).toLocaleDateString("tr-TR", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
