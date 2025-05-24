@@ -60,7 +60,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <DashboardLayout activeMenu="Dashboard">
+    <DashboardLayout activeMenu="Kontrol Paneli">
       <div className="card my-5">
         <div>
           <h2 className="text-xl md:text-2xl text-black dark:text-white">

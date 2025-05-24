@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     error: false,
     adminDashboardDatas: null,
+    allTasks: null,
 };
 
 const taskSlice = createSlice({
@@ -20,14 +21,19 @@ const taskSlice = createSlice({
         getAdminDashboardDatasSuccess: (state, { payload }) => {
             state.loading = false
             state.adminDashboardDatas = payload
-        }
+        },
+        getAllTasksSuccess: (state, { payload }) => {
+            state.loading = false
+            state.allTasks = payload
+        },
     }
 })
 
 export const {
     fetchStart,
     fetchFail,
-    getAdminDashboardDatasSuccess
+    getAdminDashboardDatasSuccess,
+    getAllTasksSuccess
 } = taskSlice.actions
 
 export default taskSlice.reducer

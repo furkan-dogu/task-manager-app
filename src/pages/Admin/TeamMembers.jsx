@@ -1,8 +1,8 @@
-import React from 'react'
+import DashboardLayout from '../../layouts/DashboardLayout'
 
 const TeamMembers = () => {
   return (
-    <div>TeamMembers</div>
+    <DashboardLayout activeMenu="Ekip Üyeleri">TeamMembers</DashboardLayout>
   )
 }
 

@@ -3,7 +3,8 @@ import useAxios from "./useAxios"
 import { 
     fetchFail, 
     fetchStart,
-    getAdminDashboardDatasSuccess 
+    getAdminDashboardDatasSuccess,
+    getAllTasksSuccess 
 } from "../features/taskSlice"
 
 const useTaskCalls = () => {
@@ -14,7 +15,6 @@ const useTaskCalls = () => {
         dispatch(fetchStart())
         try {
             const { data } = await axiosWithToken.get("/api/tasks/dashboard-data")
-            // console.log(data);
             dispatch(getAdminDashboardDatasSuccess(data))
         } catch (error) {
             dispatch(fetchFail())
@@ -22,7 +22,20 @@ const useTaskCalls = () => {
         }
     }
 
-    return { getAdminDashboardDatas }
+    const getAllTasks = async (filterStatus) => {
+        dispatch(fetchStart())
+        try {
+            const statusParam = filterStatus === "All" ? "" : filterStatus;
+
+            const { data } = await axiosWithToken.get("/api/tasks", { params: { status: statusParam } })
+            dispatch(getAllTasksSuccess(data))
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+        }
+    }
+
+    return { getAdminDashboardDatas, getAllTasks }
 }
 
 export default useTaskCalls

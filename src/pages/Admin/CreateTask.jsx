@@ -1,8 +1,8 @@
-import React from 'react'
+import DashboardLayout from '../../layouts/DashboardLayout'
 
 const CreateTask = () => {
   return (
-    <div>CreateTask</div>
+    <DashboardLayout activeMenu="Görev Oluştur">CreateTask</DashboardLayout>
   )
 }
 
