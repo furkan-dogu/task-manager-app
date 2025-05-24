@@ -66,7 +66,7 @@ const ManageTasks = () => {
     <DashboardLayout activeMenu="Görevleri Yönet">
       <div className="my-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-between flex-wrap gap-3">
             <h2 className="text-xl font-medium text-black dark:text-white">
               Görevleri Yönet
             </h2>
