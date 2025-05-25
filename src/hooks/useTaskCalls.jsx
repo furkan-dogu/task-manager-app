@@ -4,8 +4,11 @@ import {
     fetchFail, 
     fetchStart,
     getAdminDashboardDatasSuccess,
-    getAllTasksSuccess 
+    getAllTasksSuccess,
+    getTaskDetailsByIdSuccess,
+    clearTaskDetails 
 } from "../features/taskSlice"
+import toast from "react-hot-toast"
 
 const useTaskCalls = () => {
     const dispatch = useDispatch()
@@ -35,7 +38,63 @@ const useTaskCalls = () => {
         }
     }
 
-    return { getAdminDashboardDatas, getAllTasks }
+    const createTask = async (info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.post("/api/tasks", info)
+            toast.success("Görev oluşturuldu")
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`)
+        }
+    }
+
+    const getTaskDetailsById = async (id) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get(`/api/tasks/${id}`)
+            dispatch(getTaskDetailsByIdSuccess(data))
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+        }
+    }
+
+    const updateTask = async (info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`/api/tasks/${info._id}`, info)
+            dispatch(clearTaskDetails())
+            toast.success("Görev güncellendi")
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`)
+        }
+    }
+
+    const deleteTask = async (id) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.delete(`/api/tasks/${id}`)
+            dispatch(clearTaskDetails())
+            toast.success("Görev silindi")
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`)
+        }
+    }
+
+    return { 
+        getAdminDashboardDatas, 
+        getAllTasks, 
+        createTask,
+        getTaskDetailsById,
+        updateTask,
+        deleteTask 
+    }
 }
 
 export default useTaskCalls

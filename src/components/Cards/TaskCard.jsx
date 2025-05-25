@@ -1,7 +1,6 @@
 import Progress from "../Progress";
 import AvatarGroup from "../AvatarGroup";
 import { LuPaperclip } from "react-icons/lu";
-// import moment from "moment";
 
 const TaskCard = ({ item, onClick }) => {
   const {
@@ -68,7 +67,7 @@ const TaskCard = ({ item, onClick }) => {
 
   return (
     <div
-      className="bg-white dark:bg-gray-500/60 rounded-xl py-4 shadow-md shadow-gray-100 dark:shadow-gray-600 border border-gray-200/50 cursor-pointer dark:border-gray-200/20"
+      className="bg-white dark:bg-gray-500/60 rounded-xl py-4 shadow-md shadow-gray-100 dark:shadow-gray-600 border border-gray-200/50 cursor-pointer dark:border-gray-200/20 overflow-x-hidden"
       onClick={onClick}
     >
       <div className="flex items-start xs:flex-row flex-col gap-3 px-4">
@@ -92,7 +91,7 @@ const TaskCard = ({ item, onClick }) => {
         <p className="xs:text-sm text-xs font-medium text-gray-800 dark:text-gray-300 mt-4 line-clamp-2">
           {title}
         </p>
-        <p className="xs:text-xs text-[10px] text-gray-500 dark:text-gray-200/90 mt-1.5 line-clamp-2 leading-[18px]">
+        <p className="xs:text-xs text-[10px] text-gray-500 dark:text-gray-200/90 mt-1.5 line-clamp-2 leading-[18px] whitespace-pre-line">
           {description}
         </p>
         <p className="xs:text-[13px] text-xs text-gray-700/80 dark:text-gray-300/80 font-medium my-2 leading-[18px]">
@@ -106,13 +105,13 @@ const TaskCard = ({ item, onClick }) => {
 
       <div className="px-4">
         <div className="flex xs:items-center items-start justify-between xs:flex-row flex-col">
-          <div className="flex xs:flex-col flex-row justify-between w-full xs:w-auto mt-3 mb-2">
+          <div className="flex xs:flex-col flex-row justify-between xs:flex-nowrap flex-wrap w-full xs:w-auto mt-3 mb-2">
             <label className="text-xs text-gray-500 dark:text-gray-200">Başlangıç Tarihi</label>
             <p className="xs:text-[13px] text-xs font-medium text-gray-900 dark:text-gray-400">
               {new Date(createdAt).toLocaleDateString("tr-TR")}
             </p>
           </div>
-          <div className="flex xs:flex-col flex-row justify-between w-full xs:w-auto mt-3 mb-2">
+          <div className="flex xs:flex-col flex-row justify-between xs:flex-nowrap flex-wrap w-full xs:w-auto mt-3 mb-2">
             <label className="text-xs text-gray-500 dark:text-gray-200">Son Tarih</label>
             <p className="xs:text-[13px] text-xs font-medium text-gray-900 dark:text-gray-400">
               {new Date(dueDate).toLocaleDateString("tr-TR")}

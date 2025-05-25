@@ -2,7 +2,7 @@ import Result from "../assets/images/result.png"
 
 const AuthLayout = ({ children }) => {
   return (
-    <div className='flex'>
+    <div className='flex overflow-x-hidden'>
         <div className='w-screen h-screen md:w-[60vw] sm:px-12 px-[5%] pt-8'>
             <h2 className='text-lg font-medium text-black dark:text-white'>Görev Yönetimi</h2>
             {children}

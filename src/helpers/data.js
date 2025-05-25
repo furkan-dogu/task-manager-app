@@ -72,3 +72,9 @@ export const userSidebarMenuItems = [
         path: "logout",
     },
 ];
+
+export const priorityDatas = [
+    { label: "Düşük", value: "Low" }, 
+    { label: "Orta", value: "Medium" }, 
+    { label: "Yüksek", value: "High" }
+];

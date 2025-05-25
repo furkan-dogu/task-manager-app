@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 const DashboardLayout = ({ children, activeMenu }) => {
   const { user } = useSelector((state) => state.auth);
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar activeMenu={activeMenu} />
 
       {user && (

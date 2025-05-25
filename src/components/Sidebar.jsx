@@ -37,13 +37,13 @@ const Sidebar = ({ activeMenu }) => {
   }, [user]);
 
   return (
-    <div className="w-64 h-[calc(100vh-61px)] bg-white dark:bg-slate-800 border-r border-gray-200/50 sticky top-[61px] z-20">
+    <div className="xs:w-64 w-full h-[calc(100vh-61px)] bg-white dark:bg-slate-800 border-r border-gray-200/50 sticky top-[61px] z-20">
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
         <div className="relative">
           <img
             src={user?.profileImageUrl || NoUser}
             alt="Profile Image"
-            className="size-20 bg-slate-400 dark:bg-white rounded-full object-cover"
+            className="xs:size-20 size-16 bg-slate-400 dark:bg-white rounded-full object-cover"
           />
         </div>
         {user?.role === "admin" && (
@@ -51,24 +51,24 @@ const Sidebar = ({ activeMenu }) => {
             Admin
           </div>
         )}
-        <h5 className="text-gray-950 dark:text-gray-100 font-medium leading-6 mt-3">
+        <h5 className="text-gray-950 dark:text-gray-100 font-medium text-sm xs:text-base leading-6 mt-3">
           {user?.name || ""}
         </h5>
-        <p className="text-xs text-gray-500 dark:text-gray-300">{user?.email || ""}</p>
+        <p className="xs:text-xs text-[10px] text-gray-500 dark:text-gray-300">{user?.email || ""}</p>
       </div>
 
       <div className="h-[calc(100vh-270px)] overflow-y-auto">
         {sidebarData.map((item) => (
           <button
             key={item.id}
-            className={`w-full flex items-center gap-4 text-[15px] py-3 px-6 mb-3 cursor-pointer ${
+            className={`w-full flex items-center gap-4 xs:text-[15px] text-xs py-3 px-6 mb-3 cursor-pointer ${
               activeMenu === item.label
                 ? "text-primary dark:text-blue-700 bg-linear-to-r from-blue-50/40 to-blue-100/40 dark:bg-gray-300/50 border-r-3"
                 : "dark:text-white/70"
             }`}
             onClick={() => handleClick(item.path)}
           >
-            <item.icon className="text-xl" />
+            <item.icon className="xs:text-xl text-lg shrink-0" />
             {item.label}
           </button>
         ))}
