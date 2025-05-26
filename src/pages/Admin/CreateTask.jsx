@@ -29,7 +29,8 @@ const CreateTask = () => {
   });
   const [error, setError] = useState("");
 
-  const { createTask, updateTask, getTaskDetailsById, deleteTask } = useTaskCalls();
+  const { createTask, updateTask, getTaskDetailsById, deleteTask } =
+    useTaskCalls();
 
   const { taskDetails } = useSelector((state) => state.task);
 
@@ -146,6 +147,11 @@ const CreateTask = () => {
     clearData();
   };
 
+  const handleCancel = () => {
+    navigate("/admin/tasks", { replace: true, state: null });
+    clearData();
+  };
+
   return (
     <DashboardLayout activeMenu="Görev Oluştur">
       <div className="my-9">
@@ -242,7 +248,13 @@ const CreateTask = () => {
           {error && (
             <p className="text-xs font-medium text-red-500 mt-5">{error}</p>
           )}
-          <div className="flex flex-end mt-7">
+          <div className="flex justify-start flex-wrap-reverse xs:flex-nowrap mt-7 gap-3">
+            {taskId && (
+              <button className="cancel-btn" onClick={handleCancel}>
+                İPTAL
+              </button>
+            )}
+
             <button className="add-btn" onClick={handleSubmit}>
               {taskId ? "GÖREVİ GÜNCELLE" : "GÖREV OLUŞTUR"}
             </button>
