@@ -8,6 +8,7 @@ import TaskStatusTabs from "../../components/TaskStatusTabs";
 import TaskCard from "../../components/Cards/TaskCard";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
+import Loading from "../../components/Loading";
 
 const ManageTasks = () => {
   const [allDatas, setAllDatas] = useState([]);
@@ -16,7 +17,7 @@ const ManageTasks = () => {
 
   const navigate = useNavigate();
   const { getAllTasks } = useTaskCalls();
-  const { allTasks } = useSelector((state) => state.task);
+  const { allTasks, loading } = useSelector((state) => state.task);
   const { axiosWithToken } = useAxios();
 
   useEffect(() => {
@@ -62,7 +63,10 @@ const ManageTasks = () => {
     }
   };
 
-  return (
+  if (loading) {
+    return <Loading />
+  } else {
+    return (
     <DashboardLayout activeMenu="Görevleri Yönet">
       <div className="my-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between">
@@ -109,6 +113,7 @@ const ManageTasks = () => {
       </div>
     </DashboardLayout>
   );
+  }
 };
 
 export default ManageTasks;

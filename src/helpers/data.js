@@ -4,7 +4,7 @@ import {
     LuClipboardCheck,
     LuSquarePlus,
     LuLogOut,
-    LuSettings 
+    LuUserCog  
 } from 'react-icons/lu';
 
 export const adminSidebarMenuItems = [
@@ -34,9 +34,9 @@ export const adminSidebarMenuItems = [
   },
   {
     id: 5,
-    label: "Ayarlar", 
-    icon: LuSettings,
-    path: "/admin/settings",
+    label: "Profil", 
+    icon: LuUserCog ,
+    path: "/admin/profile",
   },
   {
     id: 6,
@@ -61,9 +61,9 @@ export const userSidebarMenuItems = [
     },
     {
         id: 3,
-        label: "Ayarlar",
-        icon: LuSettings ,
-        path: "/user/settings",
+        label: "Profil",
+        icon: LuUserCog  ,
+        path: "/user/profile",
     },
     {
         id: 4,

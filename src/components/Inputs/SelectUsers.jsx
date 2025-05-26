@@ -18,6 +18,12 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      setTempSelectedUsers(selectedUsers);
+    }
+  }, [isModalOpen, selectedUsers]);
+
   const selectedUserAvatars = allUsers
     .filter((user) => selectedUsers.includes(user._id))
     .map((user) => user.profileImageUrl);
@@ -61,7 +67,9 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
         title="Kullanıcıları Seçin"
       >
         <div className="space-y-4 h-[60vh] overflow-y-auto">
-          {allUsers?.map((user) => (
+          {allUsers
+            ?.filter(user => user.isActive)
+            .map((user) => (
             <div
               key={user._id}
               className="flex items-center gap-4 p-3 border-b border-gray-200"

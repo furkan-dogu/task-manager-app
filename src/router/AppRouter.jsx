@@ -10,8 +10,8 @@ import UserDashboard from "../pages/User/UserDashboard"
 import MyTasks from "../pages/User/MyTasks"
 import TaskDetail from "../pages/User/TaskDetail"
 import NotFound from "../pages/NotFound"
-import AdminSettings from "../pages/Admin/AdminSettings"
-import UserSettings from "../pages/User/UserSettings"
+import AdminProfile from "../pages/Admin/AdminProfile"
+import UserProfile from "../pages/User/UserProfile"
 
 const AppRouter = () => {
     return (
@@ -27,7 +27,7 @@ const AppRouter = () => {
                     <Route path="tasks" element={<ManageTasks />} />
                     <Route path="create-task" element={<CreateTask />} />
                     <Route path="team-members" element={<TeamMembers />} />
-                    <Route path="settings" element={<AdminSettings />} />
+                    <Route path="profile" element={<AdminProfile />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
 
@@ -36,7 +36,7 @@ const AppRouter = () => {
                     <Route index element={<UserDashboard />} />
                     <Route path="tasks" element={<MyTasks />} />
                     <Route path="tasks/:id" element={<TaskDetail />} />
-                    <Route path="settings" element={<UserSettings />} />
+                    <Route path="profile" element={<UserProfile />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
 
