@@ -1,9 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
 const ProfilePhotoSelector = ({ image, setImage }) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+
+  useEffect(() => {
+    if (image instanceof File) {
+      setPreviewUrl(URL.createObjectURL(image));
+    } else if (typeof image === "string") {
+      setPreviewUrl(image);
+    } else {
+      setPreviewUrl(null);
+    }
+  }, [image]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -34,8 +44,8 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
       />
 
       {!image ? (
-        <div className="size-20 flex items-center justify-center bg-blue-100/50 rounded-full relative">
-          <LuUser className="text-4xl text-primary" />
+        <div className="size-36 flex items-center justify-center bg-blue-100/50 rounded-full relative">
+          <LuUser className="text-6xl text-primary" />
           <button
             type="button"
             onClick={onChooseFile}
@@ -49,7 +59,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
           <img
             src={previewUrl}
             alt="Profile Photo"
-            className="size-20 rounded-full object-cover"
+            className="size-36 rounded-full object-cover"
           />
           <button
             type="button"

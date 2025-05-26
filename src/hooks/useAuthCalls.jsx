@@ -5,7 +5,8 @@ import {
     fetchStart, 
     loginSuccess,
     registerSuccess,
-    logoutSuccess 
+    logoutSuccess,
+    getUserInfoSuccess 
 } from "../features/authSlice"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
@@ -69,7 +70,44 @@ const useAuthCalls = () => {
         }
     }
 
-    return { login, register, logout };
+    const getUserInfo = async () => {
+        dispatch(fetchStart());
+        try {
+            const { data } = await axiosWithToken.get("/api/auth/profile");
+            dispatch(getUserInfoSuccess(data));
+        } catch (error) {
+            dispatch(fetchFail());
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`);
+        }
+    }
+
+    const updateUserInfo = async (info) => {
+        dispatch(fetchStart());
+        try {
+            await axiosWithToken.put("/api/auth/profile", info);
+            getUserInfo();
+            toast.success("Bilgileriniz güncellendi");
+        } catch (error) {
+            dispatch(fetchFail());
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`);
+        }
+    }
+
+    const updateUserPassword = async (info) => {
+        dispatch(fetchStart());
+        try {
+            await axiosWithToken.put("/api/auth/profile", { password: info });
+            toast.success("Şifreniz güncellendi");
+        } catch (error) {
+            dispatch(fetchFail());
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`);
+        }
+    }
+
+    return { login, register, logout, getUserInfo, updateUserInfo, updateUserPassword };
 }
 
 export default useAuthCalls

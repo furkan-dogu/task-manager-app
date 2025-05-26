@@ -7,7 +7,7 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
   return (
     <div>
-      <label htmlFor={label} className="text-[13px] text-slate-800 dark:text-slate-500">{label}</label>
+      <label htmlFor={label} className="text-[13px] text-slate-800 dark:text-slate-300">{label}</label>
       <div className="input-box">
         <input
           type={

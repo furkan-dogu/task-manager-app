@@ -19,12 +19,17 @@ const Login = () => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
+      setError("Lütfen geçerli bir e-posta adresi girin");
       return;
     }
 
     if (!password) {
-      setError("Please enter the password");
+      setError("Lütfen şifreyi girin");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Şifre en az 8 karakterden oluşmalıdır.");
       return;
     }
 
@@ -32,6 +37,8 @@ const Login = () => {
 
     login({ email, password });
   };
+
+  console.log(password.length);
 
   if (loading) {
     return <Loading />;

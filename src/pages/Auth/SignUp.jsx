@@ -32,17 +32,22 @@ const SignUp = () => {
     const { name, email, password, profileImageUrl, adminInviteToken } = data;
 
     if (!name) {
-      setError("Please enter a full name.");
+      setError("Lütfen ad soyad giriniz.");
       return;
     }
 
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
+      setError("Lütfen geçerli bir e-posta adresi girin.");
       return;
     }
 
     if (!password) {
-      setError("Please enter the password");
+      setError("Lütfen şifreyi girin.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Şifre en az 8 karakterden oluşmalıdır.");
       return;
     }
 
