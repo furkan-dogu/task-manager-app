@@ -6,7 +6,8 @@ import {
     getAdminDashboardDatasSuccess,
     getAllTasksSuccess,
     getTaskDetailsByIdSuccess,
-    clearTaskDetails 
+    clearTaskDetails,
+    getUserDashboardDatasSuccess 
 } from "../features/taskSlice"
 import toast from "react-hot-toast"
 
@@ -87,13 +88,37 @@ const useTaskCalls = () => {
         }
     }
 
+    const getUserDashboardDatas = async () => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get("/api/tasks/user-dashboard-data")
+            dispatch(getUserDashboardDatasSuccess(data))
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+        }
+    }
+
+    const updateTodoChecklist = async (id, info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`/api/tasks/${id}/todo`, info)
+            getTaskDetailsById(id)
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+        }
+    }
+
     return { 
         getAdminDashboardDatas, 
         getAllTasks, 
         createTask,
         getTaskDetailsById,
         updateTask,
-        deleteTask 
+        deleteTask,
+        getUserDashboardDatas,
+        updateTodoChecklist 
     }
 }
 

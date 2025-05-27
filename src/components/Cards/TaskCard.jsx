@@ -1,6 +1,7 @@
 import Progress from "../Progress";
 import AvatarGroup from "../AvatarGroup";
 import { LuPaperclip } from "react-icons/lu";
+import { translatePriority, translateStatus } from "../../helpers/data";
 
 const TaskCard = ({ item, onClick }) => {
   const {
@@ -39,42 +40,20 @@ const TaskCard = ({ item, onClick }) => {
     }
   };
 
-    const translateStatus = (status) => {
-    switch (status) {
-      case "Completed":
-        return "Tamamlandı";
-      case "Pending":
-        return "Bekliyor";
-      case "In Progress":
-        return "Devam Ediyor";
-      default:
-        return status;
-    }
-  };
-
-  const translatePriority = (priority) => {
-    switch (priority) {
-      case "High":
-        return "Yüksek";
-      case "Medium":
-        return "Orta";
-      case "Low":
-        return "Düşük";
-      default:
-        return priority;
-    }
-  };
-
   return (
     <div
       className="bg-white dark:bg-gray-500/60 rounded-xl py-4 shadow-md shadow-gray-100 dark:shadow-gray-600 border border-gray-200/50 cursor-pointer dark:border-gray-200/20 overflow-x-hidden"
       onClick={onClick}
     >
       <div className="flex items-start xs:flex-row flex-col gap-3 px-4">
-        <div className={`text-[11px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}>
+        <div
+          className={`text-[11px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}
+        >
           {translateStatus(status)}
         </div>
-        <div className={`text-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounded`}>
+        <div
+          className={`text-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounded`}
+        >
           {translatePriority(priority)} Öncelikli
         </div>
       </div>
@@ -106,13 +85,17 @@ const TaskCard = ({ item, onClick }) => {
       <div className="px-4">
         <div className="flex xs:items-center items-start justify-between xs:flex-row flex-col">
           <div className="flex xs:flex-col flex-row justify-between xs:flex-nowrap flex-wrap w-full xs:w-auto mt-3 mb-2">
-            <label className="text-xs text-gray-500 dark:text-gray-200">Başlangıç Tarihi</label>
+            <label className="text-xs text-gray-500 dark:text-gray-200">
+              Başlangıç Tarihi
+            </label>
             <p className="xs:text-[13px] text-xs font-medium text-gray-900 dark:text-gray-400">
               {new Date(createdAt).toLocaleDateString("tr-TR")}
             </p>
           </div>
           <div className="flex xs:flex-col flex-row justify-between xs:flex-nowrap flex-wrap w-full xs:w-auto mt-3 mb-2">
-            <label className="text-xs text-gray-500 dark:text-gray-200">Son Tarih</label>
+            <label className="text-xs text-gray-500 dark:text-gray-200">
+              Son Tarih
+            </label>
             <p className="xs:text-[13px] text-xs font-medium text-gray-900 dark:text-gray-400">
               {new Date(dueDate).toLocaleDateString("tr-TR")}
             </p>
@@ -120,11 +103,15 @@ const TaskCard = ({ item, onClick }) => {
         </div>
 
         <div className="flex items-center justify-between mt-3">
-          <AvatarGroup avatars={assignedTo?.map((item) => item.profileImageUrl) || []} />
+          <AvatarGroup
+            avatars={assignedTo?.map((item) => item.profileImageUrl) || []}
+          />
           {attachments?.length > 0 && (
             <div className="flex items-center gap-2 bg-blue-50 px-2.5 py-1.5 rounded-lg">
               <LuPaperclip className="text-primary" />
-              <span className="text-xs text-gray-900">{attachments.length}</span>
+              <span className="text-xs text-gray-900">
+                {attachments.length}
+              </span>
             </div>
           )}
         </div>

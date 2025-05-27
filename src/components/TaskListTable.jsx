@@ -1,3 +1,5 @@
+import { translatePriority, translateStatus } from "../helpers/data";
+
 const TaskListTable = ({ tableData }) => {
   const getStatusBadgeColor = (status) => {
     switch (status) {
@@ -22,32 +24,6 @@ const TaskListTable = ({ tableData }) => {
         return "bg-green-100 text-green-500 border border-green-200";
       default:
         return "bg-gray-100 text-gray-500 border border-gray-200";
-    }
-  };
-
-  const translateStatus = (status) => {
-    switch (status) {
-      case "Completed":
-        return "Tamamlandı";
-      case "Pending":
-        return "Bekliyor";
-      case "In Progress":
-        return "Devam Ediyor";
-      default:
-        return status;
-    }
-  };
-
-  const translatePriority = (priority) => {
-    switch (priority) {
-      case "High":
-        return "Yüksek";
-      case "Medium":
-        return "Orta";
-      case "Low":
-        return "Düşük";
-      default:
-        return priority;
     }
   };
   

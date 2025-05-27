@@ -6,6 +6,7 @@ const initialState = {
     adminDashboardDatas: null,
     allTasks: null,
     taskDetails: null,
+    userDashboardDatas: null
 };
 
 const taskSlice = createSlice({
@@ -33,7 +34,11 @@ const taskSlice = createSlice({
         },
         clearTaskDetails: (state) => {
             state.taskDetails = null;
-        }
+        },
+        getUserDashboardDatasSuccess: (state, { payload }) => {
+            state.loading = false
+            state.userDashboardDatas = payload
+        },
     }
 })
 
@@ -43,7 +48,8 @@ export const {
     getAdminDashboardDatasSuccess,
     getAllTasksSuccess,
     getTaskDetailsByIdSuccess,
-    clearTaskDetails
+    clearTaskDetails,
+    getUserDashboardDatasSuccess
 } = taskSlice.actions
 
 export default taskSlice.reducer
