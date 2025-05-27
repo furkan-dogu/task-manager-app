@@ -40,6 +40,7 @@ const AppRouter = () => {
                     <Route path="tasks" element={<MyTasks />} />
                     <Route path="tasks/:id" element={<TaskDetail />} />
                     <Route path="profile" element={<UserProfile />} />
+                    <Route path="profile/change-password" element={<UserProfile />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
 

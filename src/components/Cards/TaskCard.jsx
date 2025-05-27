@@ -40,6 +40,8 @@ const TaskCard = ({ item, onClick }) => {
     }
   };
 
+  console.log(assignedTo);
+
   return (
     <div
       className="bg-white dark:bg-gray-500/60 rounded-xl py-4 shadow-md shadow-gray-100 dark:shadow-gray-600 border border-gray-200/50 cursor-pointer dark:border-gray-200/20 overflow-x-hidden"
@@ -104,7 +106,10 @@ const TaskCard = ({ item, onClick }) => {
 
         <div className="flex items-center justify-between mt-3">
           <AvatarGroup
-            avatars={assignedTo?.map((item) => item.profileImageUrl) || []}
+            avatars={assignedTo?.map((item) => ({
+              name: item.name,
+              image: item.profileImageUrl,
+            })) || []}
           />
           {attachments?.length > 0 && (
             <div className="flex items-center gap-2 bg-blue-50 px-2.5 py-1.5 rounded-lg">

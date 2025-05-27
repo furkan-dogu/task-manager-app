@@ -47,7 +47,7 @@ const MyTasks = () => {
   } else {
     return (
       <DashboardLayout activeMenu="Görevlerim">
-        <div className="my-5">
+        <div className="my-5 max-w-[1920px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between">
             <h2 className="text-xl font-medium text-black dark:text-white">
               Görevlerim

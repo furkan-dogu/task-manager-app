@@ -70,7 +70,7 @@ const SignUp = () => {
   } else {
     return (
       <AuthLayout>
-        <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
+        <div className="lg:w-full h-auto mt-10 lg:mt-[5%] sm:mt-[25%] flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-black dark:text-white">
             Hesap Oluşturun
           </h3>
@@ -119,7 +119,7 @@ const SignUp = () => {
               KAYIT OL
             </button>
 
-            <p className="text-[13px] text-slate-800 dark:text-slate-500 mt-3">
+            <p className="text-[13px] text-slate-800 dark:text-slate-500 mt-3 sm:mb-3 mb-8">
               Zaten bir hesabınız var mı?{" "}
               <Link className="font-medium text-primary underline" to={"/"}>
                 Giriş

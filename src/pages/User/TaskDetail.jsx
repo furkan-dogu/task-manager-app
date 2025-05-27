@@ -146,9 +146,10 @@ const TaskDetail = () => {
                   </label>
                   <AvatarGroup
                     avatars={
-                      taskDetails?.assignedTo?.map(
-                        (user) => user?.profileImageUrl
-                      ) || []
+                      taskDetails?.assignedTo?.map((user) => ({
+                        image: user.profileImageUrl,
+                        name: user.name,
+                      })) || []
                     }
                     maxVisible={5}
                   />

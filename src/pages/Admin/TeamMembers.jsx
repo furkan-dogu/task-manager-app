@@ -44,7 +44,7 @@ const TeamMembers = () => {
   } else {
     return (
       <DashboardLayout activeMenu="Ekip Üyeleri">
-        <div className="mt-5 mb-10">
+        <div className="mt-5 mb-10 max-w-[1920px] mx-auto">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <h2 className="text-xl font-medium text-black dark:text-white">
               Ekip Üyeleri

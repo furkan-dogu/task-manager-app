@@ -26,7 +26,10 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
 
   const selectedUserAvatars = allUsers
     .filter((user) => selectedUsers.includes(user._id))
-    .map((user) => user.profileImageUrl);
+    .map((user) => ({
+      name: user.name,
+      image: user.profileImageUrl || NoUser,
+    }));
 
   const toggleUserSelection = (userId) => {
     setTempSelectedUsers((prev) =>

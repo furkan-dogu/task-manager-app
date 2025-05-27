@@ -65,77 +65,79 @@ const UserDashboard = () => {
   } else {
     return (
       <DashboardLayout activeMenu="Kontrol Paneli">
-        <div className="card my-5">
-          <div>
-            <h2 className="text-xl md:text-2xl text-black dark:text-white">
-              Merhaba {user.name}
-            </h2>
-            <p className="text-xs md:text-sm text-gray-400 dark:text-gray-300 mt-1.5">
-              {new Date().toLocaleDateString("tr-TR", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
+        <div className="max-w-[1920px] mx-auto">
+          <div className="card my-5">
+            <div>
+              <h2 className="text-xl md:text-2xl text-black dark:text-white">
+                Merhaba {user.name}
+              </h2>
+              <p className="text-xs md:text-sm text-gray-400 dark:text-gray-300 mt-1.5">
+                {new Date().toLocaleDateString("tr-TR", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mt-5">
+              <InfoCard
+                label="Toplam"
+                value={addThousandsSeperator(
+                  dashboardData?.charts?.taskDistribution?.All || 0
+                )}
+                color="bg-primary"
+              />
+              <InfoCard
+                label="Bekleyen"
+                value={addThousandsSeperator(
+                  dashboardData?.charts?.taskDistribution?.Pending || 0
+                )}
+                color="bg-violet-500"
+              />
+              <InfoCard
+                label="Devam Eden"
+                value={addThousandsSeperator(
+                  dashboardData?.charts?.taskDistribution?.InProgress || 0
+                )}
+                color="bg-cyan-500"
+              />
+              <InfoCard
+                label="Tamamlanan"
+                value={addThousandsSeperator(
+                  dashboardData?.charts?.taskDistribution?.Completed || 0
+                )}
+                color="bg-lime-500"
+              />
+            </div>
           </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mt-5">
-            <InfoCard
-              label="Toplam"
-              value={addThousandsSeperator(
-                dashboardData?.charts?.taskDistribution?.All || 0
-              )}
-              color="bg-primary"
-            />
-            <InfoCard
-              label="Bekleyen"
-              value={addThousandsSeperator(
-                dashboardData?.charts?.taskDistribution?.Pending || 0
-              )}
-              color="bg-violet-500"
-            />
-            <InfoCard
-              label="Devam Eden"
-              value={addThousandsSeperator(
-                dashboardData?.charts?.taskDistribution?.InProgress || 0
-              )}
-              color="bg-cyan-500"
-            />
-            <InfoCard
-              label="Tamamlanan"
-              value={addThousandsSeperator(
-                dashboardData?.charts?.taskDistribution?.Completed || 0
-              )}
-              color="bg-lime-500"
-            />
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
-          <div className="card">
-            <h5 className="font-medium text-black dark:text-white">
-              Görev Dağılımı
-            </h5>
-            <CustomPieChart data={pieChartData} colors={COLORS} />
-          </div>
-          <div className="card">
-            <h5 className="font-medium text-black dark:text-white">
-              Görev Öncelik Seviyeleri
-            </h5>
-            <CustomBarChart data={barChartData} />
-          </div>
-          <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
             <div className="card">
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <h5 className="text-lg text-black dark:text-white">
-                  Güncel Görevler
-                </h5>
-                <button className="card-btn" onClick={onSeeMore}>
-                  Tümünü Gör <LuArrowRight className="text-base" />
-                </button>
-              </div>
+              <h5 className="font-medium text-black dark:text-white">
+                Görev Dağılımı
+              </h5>
+              <CustomPieChart data={pieChartData} colors={COLORS} />
+            </div>
+            <div className="card">
+              <h5 className="font-medium text-black dark:text-white">
+                Görev Öncelik Seviyeleri
+              </h5>
+              <CustomBarChart data={barChartData} />
+            </div>
+            <div className="md:col-span-2">
+              <div className="card">
+                <div className="flex items-center justify-between flex-wrap gap-3">
+                  <h5 className="text-lg text-black dark:text-white">
+                    Güncel Görevler
+                  </h5>
+                  <button className="card-btn" onClick={onSeeMore}>
+                    Tümünü Gör <LuArrowRight className="text-base" />
+                  </button>
+                </div>
 
-              <TaskListTable tableData={dashboardData?.recentTasks || []} />
+                <TaskListTable tableData={dashboardData?.recentTasks || []} />
+              </div>
             </div>
           </div>
         </div>

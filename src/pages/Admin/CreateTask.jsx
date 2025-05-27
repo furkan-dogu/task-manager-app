@@ -154,7 +154,7 @@ const CreateTask = () => {
 
   return (
     <DashboardLayout activeMenu="Görev Oluştur">
-      <div className="my-9">
+      <div className="my-9 max-w-5xl mx-auto">
         <div className="form-card">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <h2 className="text-xl font-medium text-black dark:text-white">
@@ -229,7 +229,7 @@ const CreateTask = () => {
           </div>
           <div className="mt-3">
             <label className="text-xs font-medium text-slate-600 dark:text-slate-300">
-              TODO Kontrol Listesi
+              Yapılacaklar Kontrol Listesi
             </label>
             <TodoListInput
               todoList={data?.todoChecklist}
