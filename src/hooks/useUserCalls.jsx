@@ -52,7 +52,31 @@ const useUserCalls = () => {
         }
     }
 
-    return { getAllUsers, deleteUser, updateIsActive }
+    const adminUpdateUserInfo = async (id, info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`/api/users/${id}`, info)
+            toast.success("Kullanıcı bilgileri güncellendi")
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`)
+        }
+    }
+
+    const adminUpdateUserPassword = async (id, info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`/api/users/${id}`, { password: info })
+            toast.success("Kullanıcı şifresi güncellendi")
+        } catch (error) {
+            dispatch(fetchFail())
+            console.log(error);
+            toast.error(`${error.response.data.message || error.message}`)
+        }
+    }
+
+    return { getAllUsers, deleteUser, updateIsActive, adminUpdateUserInfo, adminUpdateUserPassword }
 }
 
 export default useUserCalls

@@ -12,6 +12,7 @@ import TaskDetail from "../pages/User/TaskDetail"
 import NotFound from "../pages/NotFound"
 import AdminProfile from "../pages/Admin/AdminProfile"
 import UserProfile from "../pages/User/UserProfile"
+import MemberDetails from "../pages/Admin/MemberDetails"
 
 const AppRouter = () => {
     return (
@@ -27,6 +28,7 @@ const AppRouter = () => {
                     <Route path="tasks" element={<ManageTasks />} />
                     <Route path="create-task" element={<CreateTask />} />
                     <Route path="team-members" element={<TeamMembers />} />
+                    <Route path="team-members/:id" element={<MemberDetails />} />
                     <Route path="profile" element={<AdminProfile />} />
                     <Route path="profile/change-password" element={<AdminProfile />} />
                     <Route path="*" element={<NotFound />} />

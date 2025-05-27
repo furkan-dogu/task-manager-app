@@ -53,6 +53,8 @@ const ProfileInfoForm = () => {
     formData.append("email", data.email);
     if (data.profileImage instanceof File) {
       formData.append("profileImageUrl", data.profileImage);
+    } else if (!data.profileImage && !data.previewUrl) {
+      formData.append("profileImageUrl", "null");
     }
 
     updateUserInfo(formData);

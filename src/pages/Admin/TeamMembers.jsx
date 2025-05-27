@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
 
 const TeamMembers = () => {
-  const { getAllUsers, deleteUser, updateIsActive } = useUserCalls();
+  const { getAllUsers } = useUserCalls();
   const { allUsers, loading } = useSelector((state) => state.user);
 
   const { axiosWithToken } = useAxios();
@@ -39,10 +39,6 @@ const TeamMembers = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    deleteUser(id);
-  };
-
   if (loading) {
     return <Loading />;
   } else {
@@ -66,8 +62,6 @@ const TeamMembers = () => {
               <UserCard
                 key={user._id}
                 user={user}
-                handleDelete={handleDelete}
-                updateIsActive={updateIsActive}
               />
             ))}
           </div>
