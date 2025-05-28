@@ -4,7 +4,7 @@
   <img src="./src/assets/screenshots/task-manager.gif" />
 </div>
 
-## 🗂️ Proje Hakkında
+## Proje Hakkında
 
 Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin kolayca yürütülebilmesini sağlayan modern bir yönetim panelidir.
 
@@ -20,11 +20,11 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 
 ## İçindekiler
 
-- [Özellikler](#🚀-özellikler)
-- [Kullanılan Teknolojiler](#🛠️-kullanılan-teknolojiler)
-- [Kullanım](#🔍-kullanım)
-- [Proje Dosya Yapısı](#📁-proje-dosya-yapısı)
-- [Ekran Görüntüleri](#🖼️-ekran-görüntüleri)
+- [Özellikler](#özellikler)
+- [Kullanılan Teknolojiler](#kullanılan-teknolojiler)
+- [Kullanım](#kullanım)
+- [Proje Dosya Yapısı](#proje-dosya-yapısı)
+- [Ekran Görüntüleri](#ekran-görüntüleri)
 
 ## Canlı Demo
 
@@ -35,7 +35,7 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 - [Canlı](https://task-manager-api-virid.vercel.app/)
 - [Kodlar](https://github.com/furkan-dogu/TaskManagerAPI)
 
-## 🚀 Özellikler
+## Özellikler
 
 - Giriş yapabilen kullanıcı sistemi (admin/member ayrımı)
 - Görev oluşturma, güncelleme, silme ve kullanıcıya atama
@@ -47,7 +47,7 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 - Kullanıcı dostu arayüz ve responsive tasarım
 - Yükleme sırasında dinamik `Loading` bileşeni
 
-## 🛠️ Kullanılan Teknolojiler
+## Kullanılan Teknolojiler
 
 ### React Ekosistemi
 
@@ -73,7 +73,7 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 - **Tailwind CSS** – Utility-first yaklaşımlı modern CSS framework
 - **@tailwindcss/vite** – Tailwind ile Vite entegrasyonu
 
-## 🔍 Kullanım
+## Kullanım
 
 ### Görev Oluşturma
 
@@ -119,7 +119,7 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 - “Ekip Üyeleri” sayfasında tüm kullanıcı kartlarını inceleyin.  
 - Aktiflik durumlarını kontrol edin, kullanıcı detayına geçiş yapın.
 
-## 📁 Proje Dosya Yapısı
+## Proje Dosya Yapısı
 
 ```
 Task Manager App
@@ -213,7 +213,7 @@ Task Manager App
 └── vite.config.js
 ```
 
-## 🖼️ Ekran Görüntüleri
+## Ekran Görüntüleri
 
 <div align="center">
   <img src="./src/assets/screenshots/Screenshot_1.png"  width="35%" height="500" />
@@ -221,6 +221,6 @@ Task Manager App
   <img src="./src/assets/screenshots/Screenshot_3.png"  width="90.5%" height="450" />
 </div>
 
-## 💻 Uyumluluk
+## Uyumluluk
 
 Bu uygulama modern tüm tarayıcılarda ve mobil uyumlu olarak sorunsuz çalışır. Responsive yapı Tailwind CSS ile desteklenmiştir.
