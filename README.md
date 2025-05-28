@@ -70,7 +70,7 @@ Bu proje, kurum içi görev takibi, ekip yönetimi ve raporlama işlemlerinin ko
 
 ### Stil ve UI
 
-- **Tailwind CSS** – Utility-first yaklaşımlı modern CSS framework
+- **Tailwind CSS** – Utility-first yaklaşımlı modern CSS framework, dark mode desteğiyle birlikte
 - **@tailwindcss/vite** – Tailwind ile Vite entegrasyonu
 
 ## Kullanım
@@ -223,4 +223,5 @@ Task Manager App
 
 ## Uyumluluk
 
-Bu uygulama modern tüm tarayıcılarda ve mobil uyumlu olarak sorunsuz çalışır. Responsive yapı Tailwind CSS ile desteklenmiştir.
+Bu uygulama modern tüm tarayıcılarda ve mobil uyumlu olarak sorunsuz çalışır.  
+Responsive yapı ve dark mode desteği Tailwind CSS ile sağlanmıştır.
