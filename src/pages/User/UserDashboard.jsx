@@ -6,10 +6,10 @@ import InfoCard from "../../components/Cards/InfoCard";
 import useTaskCalls from "../../hooks/useTaskCalls";
 import CustomPieChart from "../../components/Charts/CustomPieChart";
 import CustomBarChart from "../../components/Charts/CustomBarChart";
-import { useNavigate } from "react-router-dom";
-import { LuArrowRight } from "react-icons/lu";
 import TaskListTable from "../../components/TaskListTable";
 import Loading from "../../components/Loading";
+import SelectDropdown from "../../components/Inputs/SelectDropdown";
+import { filterOptions } from "../../helpers/filterOptions";
 
 const COLORS = ["#8D51FF", "#00B8D8", "#7BCE00"];
 
@@ -17,11 +17,11 @@ const UserDashboard = () => {
   const { user } = useSelector((state) => state.auth);
   const { userDashboardDatas, loading } = useSelector((state) => state.task);
   const { getUserDashboardDatas } = useTaskCalls();
-  const navigate = useNavigate();
 
   const [dashboardData, setDashboardData] = useState(null);
   const [pieChartData, setPieChartData] = useState([]);
   const [barChartData, setBarChartData] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("Hepsi");
 
   useEffect(() => {
     getUserDashboardDatas();
@@ -54,10 +54,6 @@ const UserDashboard = () => {
     ];
 
     setBarChartData(priorityLevelData);
-  };
-
-  const onSeeMore = () => {
-    navigate("/user/tasks");
   };
 
   if (loading) {
@@ -131,12 +127,17 @@ const UserDashboard = () => {
                   <h5 className="text-lg text-black dark:text-white">
                     Güncel Görevler
                   </h5>
-                  <button className="card-btn" onClick={onSeeMore}>
-                    Tümünü Gör <LuArrowRight className="text-base" />
-                  </button>
+                  <div className="flex justify-end mb-4 sm:max-w-56 max-w-none w-full ml-auto">
+                    <SelectDropdown
+                      options={filterOptions}
+                      value={selectedFilter}
+                      onChange={setSelectedFilter}
+                      placeholder="Görevleri filtrele"
+                    />
+                  </div>
                 </div>
 
-                <TaskListTable tableData={dashboardData?.recentTasks || []} />
+                <TaskListTable tableData={dashboardData?.recentTasks || []} selectedFilter={selectedFilter} />
               </div>
             </div>
           </div>

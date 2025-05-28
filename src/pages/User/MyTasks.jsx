@@ -6,11 +6,14 @@ import { useSelector } from "react-redux";
 import TaskStatusTabs from "../../components/TaskStatusTabs";
 import TaskCard from "../../components/Cards/TaskCard";
 import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
 
 const MyTasks = () => {
   const [allDatas, setAllDatas] = useState([]);
   const [tabs, setTabs] = useState([]);
   const [filterStatus, setFilterStatus] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 6;
 
   const navigate = useNavigate();
   const { getAllTasks } = useTaskCalls();
@@ -20,6 +23,10 @@ const MyTasks = () => {
     getAllTasks(filterStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterStatus]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [allDatas]);
 
   useEffect(() => {
     if (!allTasks) return;
@@ -42,6 +49,11 @@ const MyTasks = () => {
     navigate(`/user/tasks/${item._id}`);
   };
 
+  const totalPages = Math.ceil(allDatas.length / tasksPerPage);
+  const startIndex = (currentPage - 1) * tasksPerPage;
+  const endIndex = startIndex + tasksPerPage;
+  const currentTasks = allDatas.slice(startIndex, endIndex);
+
   if (loading) {
     return <Loading />;
   } else {
@@ -61,13 +73,20 @@ const MyTasks = () => {
             )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
-            {allDatas?.map((item) => (
+            {currentTasks?.map((item) => (
               <TaskCard
                 key={item._id}
                 item={item}
                 onClick={() => handleClick(item)}
               />
             ))}
+          </div>
+          <div className="mt-8">
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
           </div>
         </div>
       </DashboardLayout>

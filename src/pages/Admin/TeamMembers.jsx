@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUserCalls from "../../hooks/useUserCalls";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { LuFileSpreadsheet } from "react-icons/lu";
@@ -7,6 +7,7 @@ import UserCard from "../../components/Cards/UserCard";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
 
 const TeamMembers = () => {
   const { getAllUsers } = useUserCalls();
@@ -14,10 +15,17 @@ const TeamMembers = () => {
 
   const { axiosWithToken } = useAxios();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 12;
+
   useEffect(() => {
     getAllUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   const handleDownloadReport = async () => {
     try {
@@ -39,6 +47,11 @@ const TeamMembers = () => {
     }
   };
 
+  const totalPages = Math.ceil((allUsers?.length || 0) / usersPerPage);
+  const startIndex = (currentPage - 1) * usersPerPage;
+  const endIndex = startIndex + usersPerPage;
+  const currentUsers = allUsers?.slice(startIndex, endIndex);
+
   if (loading) {
     return <Loading />;
   } else {
@@ -58,12 +71,16 @@ const TeamMembers = () => {
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-            {allUsers?.map((user) => (
-              <UserCard
-                key={user._id}
-                user={user}
-              />
+            {currentUsers?.map((user) => (
+              <UserCard key={user._id} user={user} />
             ))}
+          </div>
+          <div className="mt-8">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
         </div>
       </DashboardLayout>

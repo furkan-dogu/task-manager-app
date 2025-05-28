@@ -40,12 +40,12 @@ const SelectDropdown = ({ options, value, onChange, placeholder }) => {
       </button>
 
       {isOpen && (
-        <div className="absolute w-full text-black dark:text-white bg-white dark:bg-gray-400 border border-slate-100 dark:border-slate-400 rounded-md mt-1 shadow-md z-10 overflow-hidden">
+        <div className="absolute w-full text-black dark:text-white bg-white dark:bg-gray-400 border border-slate-100 dark:border-slate-400 rounded-md mt-1 shadow-md z-10 sm:max-h-60 max-h-56 overflow-y-auto">
           {options.map((option) => (
             <div
               key={option.value}
               onClick={() => handleSelect(option.value)}
-              className="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 cursor-pointer"
+              className="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 cursor-pointer text-sm sm:text-base"
             >
               {option.label}
             </div>
