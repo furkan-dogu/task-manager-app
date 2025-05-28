@@ -11,6 +11,7 @@ import useTaskCalls from "../../hooks/useTaskCalls";
 import { useSelector } from "react-redux";
 import Modal from "../../components/Modal";
 import DeleteAlert from "../../components/DeleteAlert";
+import Loading from "../../components/Loading";
 
 const CreateTask = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const CreateTask = () => {
     attachments: [],
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { createTask, updateTask, getTaskDetailsById, deleteTask } =
     useTaskCalls();
@@ -50,27 +52,38 @@ const CreateTask = () => {
     });
   };
 
-  useEffect(() => {
-    if (taskId) {
-      getTaskDetailsById(taskId);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taskId]);
+ useEffect(() => {
+  if (taskId) {
+    setLoading(true);
+    getTaskDetailsById(taskId);
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [taskId]);
 
-  useEffect(() => {
-    if (taskDetails && taskId) {
-      setCurrentTask(taskDetails);
-      setData({
-        title: taskDetails.title,
-        description: taskDetails.description,
-        priority: taskDetails.priority,
-        dueDate: new Date(taskDetails.dueDate).toISOString().split("T")[0],
-        assignedTo: taskDetails?.assignedTo?.map((item) => item._id) || [],
-        todoChecklist: taskDetails.todoChecklist.map((item) => item.text) || [],
-        attachments: taskDetails?.attachments || [],
-      });
-    }
-  }, [taskDetails, taskId]);
+useEffect(() => {
+  if (taskId && taskDetails && taskDetails._id === taskId) {
+    setCurrentTask(taskDetails);
+    setData({
+      title: taskDetails.title,
+      description: taskDetails.description,
+      priority: taskDetails.priority,
+      dueDate: new Date(taskDetails.dueDate).toISOString().split("T")[0],
+      assignedTo: taskDetails?.assignedTo?.map((item) => item._id) || [],
+      todoChecklist: taskDetails.todoChecklist.map((item) => item.text) || [],
+      attachments: taskDetails?.attachments || [],
+    });
+    setLoading(false); 
+  }
+
+  if (taskId && taskDetails === null) {
+    setLoading(false);
+  }
+
+  if (!taskId) {
+    setLoading(false);
+  }
+}, [taskDetails, taskId]);
+
 
   const handleSubmit = () => {
     setError(null);
@@ -152,7 +165,10 @@ const CreateTask = () => {
     clearData();
   };
 
-  return (
+  if (loading) {
+    return <Loading />
+  } else {
+    return (
     <DashboardLayout activeMenu="Görev Oluştur">
       <div className="my-9 max-w-5xl mx-auto">
         <div className="form-card">
@@ -274,6 +290,7 @@ const CreateTask = () => {
       </Modal>
     </DashboardLayout>
   );
+  }
 };
 
 export default CreateTask;

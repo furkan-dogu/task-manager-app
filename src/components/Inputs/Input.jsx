@@ -17,6 +17,7 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
           id={label}
           value={value}
           onChange={(e) => onChange(e)}
+          autoComplete="off"
           className="w-full bg-transparent outline-none dark:cursor-default text-black dark:text-white"
         />
 

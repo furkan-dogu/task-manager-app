@@ -154,6 +154,7 @@ const MemberDetails = () => {
                 type="text"
                 name="name"
                 className="form-input"
+                autoComplete="off"
                 value={data.name}
                 onChange={handleChange}
               />
@@ -167,6 +168,7 @@ const MemberDetails = () => {
                 type="email"
                 name="email"
                 className="form-input"
+                autoComplete="off"
                 value={data.email}
                 onChange={handleChange}
               />
