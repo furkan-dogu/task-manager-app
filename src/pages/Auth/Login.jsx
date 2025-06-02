@@ -38,8 +38,6 @@ const Login = () => {
     login({ email, password });
   };
 
-  console.log(password.length);
-
   if (loading) {
     return <Loading />;
   } else {
