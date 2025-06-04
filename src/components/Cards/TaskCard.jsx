@@ -40,8 +40,6 @@ const TaskCard = ({ item, onClick }) => {
     }
   };
 
-  console.log(assignedTo);
-
   return (
     <div
       className="bg-white dark:bg-gray-500/60 rounded-xl py-4 shadow-md shadow-gray-100 dark:shadow-gray-600 border border-gray-200/50 cursor-pointer dark:border-gray-200/20 overflow-x-hidden"
