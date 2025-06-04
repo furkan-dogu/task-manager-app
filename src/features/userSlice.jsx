@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-    name: "task",
+    name: "user",
     initialState,
     reducers: {
         fetchStart: (state) => {
